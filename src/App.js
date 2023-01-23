@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from './components/Button';
+import Input from './components/Input';
+import Message from './components/Message';
 
 function App() {
   return (
@@ -17,6 +20,10 @@ function App() {
         >
           Learn React
         </a>
+        {/* <Input />
+        <Button /> */}
+        <Message>This is my first message</Message>
+        <Message variant="error">You do not have access to this application</Message>
       </header>
     </div>
   );
