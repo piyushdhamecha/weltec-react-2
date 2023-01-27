@@ -6,3 +6,11 @@ export const MessageStyle  = styled.span`
   color: black;
   margin: 5px 0;
 `
+
+
+export const MessageErrorStyle  = styled.span`
+  padding: 10px;
+  background-color: red;
+  color: black;
+  margin: 5px 0;
+`

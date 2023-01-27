@@ -1,30 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import Button from './components/Button';
-import Input from './components/Input';
-import Message from './components/Message';
+import "./App.css";
+import Counter from "./Counter";
+import CounterClass from "./CounterClass";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {/* <Input />
-        <Button /> */}
-        <Message>This is my first message</Message>
-        <Message variant="error">You do not have access to this application</Message>
-      </header>
+    <div>
+      <Counter />
+      <CounterClass />
     </div>
   );
 }
