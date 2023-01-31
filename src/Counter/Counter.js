@@ -7,16 +7,13 @@ const Counter = () => {
   const [count, setCount] = useState(0);
 
   const handleIncrementClick = () => {
-    debugger
     setCount(count + 1);
   };
 
   const handleDecrementClick = () => {
-    debugger
     setCount(count - 1);
   };
 
-  debugger
   return (
     <ContainerStyled>
       <h3>Functional component</h3>
