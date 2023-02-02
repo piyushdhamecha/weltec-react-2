@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { StyledContainer, StyledTable } from "./ProductListClass.styled";
+import ProductListRow from "./ProductListRow";
 
 class ProductListClass extends Component {
   constructor() {
@@ -44,12 +45,7 @@ class ProductListClass extends Component {
                 <th>Price</th>
               </tr>
               {this.state.productList.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.title}</td>
-                  <td>{item.brand}</td>
-                  <td>{item.category}</td>
-                  <td>{item.price}</td>
-                </tr>
+                <ProductListRow item={item} />
               ))}
             </tbody>
           </StyledTable>
