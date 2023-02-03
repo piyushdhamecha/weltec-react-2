@@ -27,9 +27,16 @@ class ProductListClass extends Component {
       });
   }
 
+  componentDidUpdate() {
+    console.log('ComponentDidUpdate called')
+  }
+
+  componentWillUnmount() {
+    console.log('ComponentWillUnmount called')
+  }
+
   render() {
     console.log("Render method called");
-    console.log(this.state);
 
     return (
       <StyledContainer>

@@ -1,11 +1,19 @@
-import ProductList from "./ProductList"
+import { useState } from "react";
+import ProductList from "./ProductList";
 
-const App = () => {
+function App() {
+  const [showComponent, setShowComponent] = useState(false)
+
+  const handleButtonClick = () => {
+    setShowComponent(!showComponent)
+  }
+  
   return (
     <div>
-      <ProductList />
+      <button onClick={handleButtonClick}>{showComponent? 'Hide': 'Show'}</button>
+      {showComponent && <ProductList />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
