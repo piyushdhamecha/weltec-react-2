@@ -1,19 +1,14 @@
-import { useState } from "react";
 import "./App.css";
-import Counter from "./Counter";
-import CounterClass from "./CounterClass";
+// import ClassReference from "./References/ClassReferences";
+// import FunctionalReference from "./References/FunctionalReference";
+import VideoReference from "./References/VideoReference";
 
-function App() {
-  const [showClassComponent ,setShowClassComponent] = useState(false)
+const App = () => {
   return (
-    <div>
-      <Counter />
-      <button onClick={() => setShowClassComponent(!showClassComponent)}>
-        {showClassComponent ? 'Hide': 'Show'}
-      </button>
-      {showClassComponent && <CounterClass />}
-    </div>
+    
+      <VideoReference  />
+    
   );
-}
+};
 
 export default App;
