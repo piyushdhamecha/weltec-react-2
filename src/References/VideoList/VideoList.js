@@ -1,6 +1,5 @@
-import { useRef } from "react";
 import data from "./data.json";
-import { VideoItemStyled, VideoListContainer } from "./VideoList.styled";
+import {  VideoListContainer } from "./VideoList.styled";
 import VideoListItem from "./VideoListItem";
 
 const VideoList = () => {
