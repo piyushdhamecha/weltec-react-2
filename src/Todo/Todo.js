@@ -4,24 +4,19 @@ import {
   TextField,
   Typography,
   List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  ListItemButton,
-  ListItemIcon,
-  Checkbox,
   FormControl,
   RadioGroup,
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useMemo, useRef, useState } from "react";
+import TodoListItem from "./TodoListItem";
 
 const Todo = () => {
   const [description, setDescription] = useState("");
   const [todoList, setTodoList] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [completeAll, setCompleteAll] = useState(false);
 
   const inputRef = useRef();
 
@@ -53,7 +48,7 @@ const Todo = () => {
     const updatedTodoList = todoList.map((todoItem, todoItemIndex) => {
       if (index === todoItemIndex) {
         return {
-          ...todoItem,
+          description: todoItem.description,
           completed: !todoItem.completed,
         };
       }
@@ -64,9 +59,21 @@ const Todo = () => {
     setTodoList(updatedTodoList);
   };
 
-  const filteredTodoList = useMemo(() => {
-    console.log("Filter function called");
+  const handleCompleteAllToggle = () => {
+    const newValue = !completeAll;
 
+    const updatedTodoList = todoList.map((todoItem) => {
+      return {
+        description: todoItem.description,
+        completed: newValue,
+      };
+    });
+
+    setTodoList(updatedTodoList);
+    setCompleteAll(newValue);
+  };
+
+  const filteredTodoList = useMemo(() => {
     if (filter === "completed") {
       return todoList.filter((todoItem) => todoItem.completed === true);
     }
@@ -97,11 +104,21 @@ const Todo = () => {
       </Box>
       <Box width="400px">
         <List dense={true}>
-          <ListItem>
+          <Box margin="10px 0 0 20px">
+            <input
+              id="complete-all"
+              type="checkbox"
+              checked={completeAll}
+              onChange={handleCompleteAllToggle}
+            />
+            <label htmlFor="complete-all">Complete all</label>
+          </Box>
+          {/* <ListItem>
             <ListItemButton
               role={undefined}
               dense
               disableRipple
+              onClick={}
             >
               <ListItemIcon sx={{ minWidth: "auto" }}>
                 <Checkbox
@@ -116,51 +133,12 @@ const Todo = () => {
                 primary="Complete all"
               />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           {filteredTodoList.map((todoItem, index) => {
-            const labelId = `checkbox-list-label-${index}`;
+            // const labelId = `checkbox-list-label-${index}`;
 
             return (
-              <ListItem
-                key={index}
-                secondaryAction={
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => handleDeleteClick(index)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              >
-                {/* <ListItemText primary={description} /> */}
-                <ListItemButton
-                  role={undefined}
-                  onClick={() => handleCompleteToggle(index)}
-                  dense
-                  disableRipple
-                >
-                  <ListItemIcon sx={{ minWidth: "auto" }}>
-                    <Checkbox
-                      edge="start"
-                      checked={todoItem.completed}
-                      tabIndex={-1}
-                      disableRipple
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  </ListItemIcon>
-                  <ListItemText
-                    id={labelId}
-                    primary={
-                      todoItem.completed ? (
-                        <del>{todoItem.description}</del>
-                      ) : (
-                        todoItem.description
-                      )
-                    }
-                  />
-                </ListItemButton>
-              </ListItem>
+              <TodoListItem key={index} todoItem={todoItem} index={index} />
             );
           })}
         </List>
