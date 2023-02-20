@@ -9,7 +9,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
 
-const TodoListItem = React.memo(({ todoItem, index }) => {
+const TodoListItem = React.memo(({ todoItem, index, onDeleteClick, onCompleteToggle }) => {
   console.log('TodoListItem rendered')
   return (
     <ListItem
@@ -18,7 +18,7 @@ const TodoListItem = React.memo(({ todoItem, index }) => {
         <IconButton
           edge="end"
           aria-label="delete"
-          // onClick={() => handleDeleteClick(index)}
+          onClick={() => onDeleteClick(index)}
         >
           <DeleteIcon />
         </IconButton>
@@ -26,7 +26,7 @@ const TodoListItem = React.memo(({ todoItem, index }) => {
     >
       <ListItemButton
         role={undefined}
-        // onClick={() => handleCompleteToggle(index)}
+        onClick={() => onCompleteToggle(index)}
         dense
         disableRipple
       >
@@ -36,11 +36,9 @@ const TodoListItem = React.memo(({ todoItem, index }) => {
             checked={todoItem.completed}
             tabIndex={-1}
             disableRipple
-            // inputProps={{ "aria-labelledby": labelId }}
           />
         </ListItemIcon>
         <ListItemText
-          // id={labelId}
           primary={
             todoItem.completed ? (
               <del>{todoItem.description}</del>
@@ -52,6 +50,6 @@ const TodoListItem = React.memo(({ todoItem, index }) => {
       </ListItemButton>
     </ListItem>
   );
-});
+})
 
 export default TodoListItem;

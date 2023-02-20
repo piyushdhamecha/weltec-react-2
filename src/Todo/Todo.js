@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import TodoListItem from "./TodoListItem";
 
 const Todo = () => {
@@ -36,15 +36,15 @@ const Todo = () => {
     inputRef.current.focus();
   };
 
-  const handleDeleteClick = (index) => {
+  const handleDeleteClick = useCallback((index) => {
     const todoListCopy = [...todoList];
 
     todoListCopy.splice(index, 1);
 
     setTodoList(todoListCopy);
-  };
+  }, [todoList]);
 
-  const handleCompleteToggle = (index) => {
+  const handleCompleteToggle = useCallback((index) => {
     const updatedTodoList = todoList.map((todoItem, todoItemIndex) => {
       if (index === todoItemIndex) {
         return {
@@ -57,7 +57,7 @@ const Todo = () => {
     });
 
     setTodoList(updatedTodoList);
-  };
+  }, [todoList])
 
   const handleCompleteAllToggle = () => {
     const newValue = !completeAll;
@@ -113,32 +113,16 @@ const Todo = () => {
             />
             <label htmlFor="complete-all">Complete all</label>
           </Box>
-          {/* <ListItem>
-            <ListItemButton
-              role={undefined}
-              dense
-              disableRipple
-              onClick={}
-            >
-              <ListItemIcon sx={{ minWidth: "auto" }}>
-                <Checkbox
-                  edge="start"
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ "aria-labelledby": `checkbox-list-label-complete-all` }}
-                />
-              </ListItemIcon>
-              <ListItemText
-                id="checkbox-list-label-complete-all"
-                primary="Complete all"
-              />
-            </ListItemButton>
-          </ListItem> */}
           {filteredTodoList.map((todoItem, index) => {
-            // const labelId = `checkbox-list-label-${index}`;
-
             return (
-              <TodoListItem key={index} todoItem={todoItem} index={index} />
+              <TodoListItem
+                key={index}
+                todoItem={todoItem}
+                index={index}
+                onDeleteClick={handleDeleteClick}
+                // onDeleteClick={ref2}
+                onCompleteToggle={handleCompleteToggle}
+              />
             );
           })}
         </List>
